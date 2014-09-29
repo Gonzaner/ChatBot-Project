@@ -1,5 +1,7 @@
 package chatbot.model;
 
+import javax.swing.JOptionPane;
+
 public class ChatBot
 {
 	private String name;
@@ -17,6 +19,7 @@ public class ChatBot
 	{
 		this.name = name;
 		numberOfChats = 0;
+		
 	}
 
 	/**
@@ -71,7 +74,7 @@ public class ChatBot
 	{
 		boolean okToQuit = false;
 
-		if (input.equals("Goodbye"))
+		if (input != null && input.equals("Goodbye")) 
 		{
 			okToQuit = true;
 		}
