@@ -1,11 +1,14 @@
 package chatbot.model;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class ChatBot
 {
 	private String name;
 	private int numberOfChats;
+	private ArrayList<String> memeList;
 
 	/**
 	 * Creates a ChatBot object with a specified name. Initializes the total
