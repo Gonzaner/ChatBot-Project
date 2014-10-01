@@ -20,7 +20,6 @@ public class ChatBotAppController
 	 * The ChatBot Model instance
 	 */
 	private ChatBot notSoCleverBot;
-
 	/**
 	 * The startup message for out ChatBot application
 	 */
@@ -34,7 +33,7 @@ public class ChatBotAppController
 	{
 		appView = new ChatBotView(this);
 		notSoCleverBot = new ChatBot("Mr. Cantare");
-		startMessage = "Welcome to the" + notSoCleverBot.getName() + " Chatbot type in your name please";
+		startMessage = "Welcome to the " + notSoCleverBot.getName() + " Chatbot type in your name please";
 	}
 
 	/**
@@ -56,6 +55,7 @@ public class ChatBotAppController
 
 		while (!notSoCleverBot.quitChecker(message))
 		{
+			message = notSoCleverBot.processText(message);
 			message = appView.displayChatBotConverstations(message);
 		}
 

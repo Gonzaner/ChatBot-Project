@@ -9,20 +9,21 @@ public class ChatBot
 	private String name;
 	private int numberOfChats;
 	private ArrayList<String> memeList;
-
+	private ArrayList<String> contentList;
 	/**
-	 * Creates a ChatBot object with a specified name. Initializes the total
-	 * chats to 0
-	 * 
-	 * @param name
-	 *            The name of the ChatBot.
+	 * Creates a ChatBot object with a specified name. Initializes the total chats to 0
+	 * @param name The name of the ChatBot.          
 	 */
 
 	public ChatBot(String name)
 	{
 		this.name = name;
 		numberOfChats = 0;
-
+		
+		memeList = new ArrayList<String>(); 
+		fillTheMemeList();
+		contentList = new ArrayList<String>();
+		fillTheContentList();
 	}
 
 	/**
@@ -65,7 +66,87 @@ public class ChatBot
 	{
 		numberOfChats++;
 	}
+	/**
+	 * Fills the contents of the memeList with internet memes.
+	 */
+	private void fillTheMemeList()
+	{
+		memeList.add("y u made bro");
+		memeList.add("doh!");
+		memeList.add("Winter is coming.");
+		memeList.add("one does not simply");
+		memeList.add("Nyx face");
+		memeList.add("Yosuke");
+		memeList.add("Igor");
+	}
+	
+	private void fillTheContentList()
+	{
+		contentList.add("Persona");
+		contentList.add("");
+	}
+	
+	
+	/**
+	 *  Processed the supplied text from the user to provide a message from the ChatBot.
+	 * @param userText The user supplied text.
+	 * @return What the ChatBot says because of the supplied text.
+	 */
+	public String processText(String userText)
+	{
+		String processedText = "";
+		incrementChats();
+		if(contentChecker(userText))
+		{
+			processedText = "Hey that's cool, let's talk about that!";
+		}
+		if(memeChecker(userText))
+		{
+			processedText = "Hey, you found a meme: " + userText;
+			processedText += " Isn't that cool";
+		}
+		
+		return processedText;
+	}
 
+	
+	private boolean contentChecker (String currentText)
+	{
+		boolean isContent = false;
+		if currentText.contains(contentList);
+		for(String currentContent : contentList)
+		{
+			if(currentContent.equalsIgnoreCase(currentText))
+			{
+				isContent = true;
+			}
+		}
+		
+		return isContent;
+	}
+	
+	private boolean memeChecker(String currentText)
+	{
+		boolean isAMeme = false;
+		
+		for(String currentMeme : memeList)
+		{
+			if(currentMeme.equalsIgnoreCase(currentText))
+			{
+				isAMeme = true;
+			}
+		}
+		
+		for(int loopCount = 0; loopCount < memeList.size(); loopCount++)
+		{
+			if(memeList.get(loopCount).equalsIgnoreCase(currentText))
+			{
+				isAMeme = true;
+			}
+		}
+		
+		return isAMeme;
+	}
 	/**
 	 * Checks to see if it is okay to quit the program
 	 * 
