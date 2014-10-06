@@ -64,7 +64,8 @@ public class ChatBotAppController
 	}
 
 	/**
-	 * Quits the ChatBot application with a message to the user that the application is closing.
+	 * Quits the ChatBot application with a message to the user that the
+	 * application is closing.
 	 */
 	private void quit()
 	{

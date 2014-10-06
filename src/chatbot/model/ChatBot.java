@@ -9,21 +9,24 @@ public class ChatBot
 	private String name;
 	private int numberOfChats;
 	private ArrayList<String> memeList;
-	private ArrayList<String> contentList;
+	private String contentArea; 
 	/**
-	 * Creates a ChatBot object with a specified name. Initializes the total chats to 0
-	 * @param name The name of the ChatBot.          
+	 * Creates a ChatBot object with a specified name. Initializes the total
+	 * chats to 0
+	 * 
+	 * @param name
+	 *            The name of the ChatBot.
 	 */
 
 	public ChatBot(String name)
 	{
 		this.name = name;
 		numberOfChats = 0;
-		
-		memeList = new ArrayList<String>(); 
+
+		memeList = new ArrayList<String>();
 		fillTheMemeList();
-		contentList = new ArrayList<String>();
-		fillTheContentList();
+		
+		contentArea = "Persona";
 	}
 
 	/**
@@ -66,6 +69,7 @@ public class ChatBot
 	{
 		numberOfChats++;
 	}
+
 	/**
 	 * Fills the contents of the memeList with internet memes.
 	 */
@@ -79,74 +83,114 @@ public class ChatBot
 		memeList.add("Yosuke");
 		memeList.add("Igor");
 	}
-	
-	private void fillTheContentList()
-	{
-		contentList.add("Persona");
-		contentList.add("");
-	}
+
 	
 	
 	/**
-	 *  Processed the supplied text from the user to provide a message from the ChatBot.
-	 * @param userText The user supplied text.
+	 * Processed the supplied text from the user to provide a message from the
+	 * ChatBot.
+	 * 
+	 * @param userText
+	 *            The user supplied text.
 	 * @return What the ChatBot says because of the supplied text.
 	 */
 	public String processText(String userText)
 	{
 		String processedText = "";
 		incrementChats();
-		if(contentChecker(userText))
+
+		int randomChoice = (int) (Math.random() * 3);
+
+		if (randomChoice == 0)
 		{
-			processedText = "Hey that's cool, let's talk about that!";
+			if(stringLengthChecker(userText))
+			{
+				processedText = " WHAT THE HELL! Why are you typing so much?! This isn't an essay bro.";
+			}
 		}
-		if(memeChecker(userText))
+		else if (randomChoice == 1)
 		{
-			processedText = "Hey, you found a meme: " + userText;
-			processedText += " Isn't that cool";
+			if(contentChecker(userText))
+			{
+				processedText = "Oh " + userText + " that's interesting! Let's talk about that ";
+				processedText = "Which one is your favorite of the series?";
+				
+				
+			}
 		}
-		
+		else
+		{
+			if (memeChecker(userText))
+			{
+
+				processedText = "Hey, you found a meme: " + userText;
+				processedText += " Isn't that cool";
+			}
+			else
+			{
+				processedText = "Boring, that wasn't a meme. "; 
+			}
+
+		}
+
 		return processedText;
 	}
 
-	
-	private boolean contentChecker (String currentText)
+	private boolean stringLengthChecker(String input)
 	{
-		boolean isContent = false;
-		if currentText.contains(contentList);
-		for(String currentContent : contentList)
+		boolean isTooLong = false;
+		if (input.length() >= 20)
 		{
-			if(currentContent.equalsIgnoreCase(currentText))
-			{
-				isContent = true;
-			}
+			isTooLong = true;
 		}
-		
-		return isContent;
+		return isTooLong;
 	}
+
+	/**
+	 * Checks if the supplied String contains the content area of the Chatbot
+	 * 
+	 * @param input
+	 *            The user supplied String
+	 * @return Whether the ChatBot's special content area is inside the input
+	 *         string
+	 */
 	
+	private boolean contentChecker(String input)
+	{
+		boolean hasMyContent = false;
+
+		if (input.contains(contentArea))
+		{
+			hasMyContent = true;
+		}
+
+		return hasMyContent;
+	}
+
+	/**
+	 * Checks to see if the user text matches any of the memes in the Chatbot's
+	 * meme list.
+	 * 
+	 * @param currentText
+	 *            The user supplied text
+	 * @return If the String matched any of the built in memes.
+	 */
+
 	private boolean memeChecker(String currentText)
 	{
 		boolean isAMeme = false;
-		
-		for(String currentMeme : memeList)
+
+		for (String currentMeme : memeList)
 		{
-			if(currentMeme.equalsIgnoreCase(currentText))
+			if (currentMeme.equalsIgnoreCase(currentText))
 			{
 				isAMeme = true;
 			}
 		}
-		
-		for(int loopCount = 0; loopCount < memeList.size(); loopCount++)
-		{
-			if(memeList.get(loopCount).equalsIgnoreCase(currentText))
-			{
-				isAMeme = true;
-			}
-		}
-		
+
 		return isAMeme;
 	}
+
 	/**
 	 * Checks to see if it is okay to quit the program
 	 * 
