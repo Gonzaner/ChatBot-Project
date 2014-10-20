@@ -3,7 +3,11 @@ package chatbot.view;
 import javax.swing.JFrame;
 
 import chatbot.controller.ChatBotAppController;
-
+/**
+ * Sets up the frame.
+ * @author ngon1817
+ *
+ */
 public class ChatBotFrame extends JFrame
 {
 	private ChatBotPanel basePanel;
@@ -18,6 +22,7 @@ public class ChatBotFrame extends JFrame
 	{
 		this.setContentPane(basePanel);
 		this.setSize(400, 400);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 
