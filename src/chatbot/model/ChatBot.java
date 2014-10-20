@@ -9,7 +9,8 @@ public class ChatBot
 	private String name;
 	private int numberOfChats;
 	private ArrayList<String> memeList;
-	private String contentArea; 
+	private String contentArea;
+
 	/**
 	 * Creates a ChatBot object with a specified name. Initializes the total
 	 * chats to 0
@@ -25,7 +26,7 @@ public class ChatBot
 
 		memeList = new ArrayList<String>();
 		fillTheMemeList();
-		
+
 		contentArea = "Persona";
 	}
 
@@ -84,8 +85,6 @@ public class ChatBot
 		memeList.add("Igor");
 	}
 
-	
-	
 	/**
 	 * Processed the supplied text from the user to provide a message from the
 	 * ChatBot.
@@ -100,37 +99,47 @@ public class ChatBot
 		incrementChats();
 
 		int randomChoice = (int) (Math.random() * 3);
-
-		if (randomChoice == 0)
+		if (userText != null)
 		{
-			if(stringLengthChecker(userText))
+			if (randomChoice == 0)
 			{
-				processedText = " WHAT THE HELL! Why are you typing so much?! This isn't an essay bro.";
+				if (stringLengthChecker(userText))
+				{
+					processedText = " WHAT THE HELL! Why are you typing so much?! This isn't an essay bro.";
+				}
+				else
+				{
+					processedText = "You should type more.";
+				}
 			}
-		}
-		else if (randomChoice == 1)
-		{
-			if(contentChecker(userText))
+			else if (randomChoice == 1)
 			{
-				processedText = "Oh " + userText + " that's interesting! Let's talk about that ";
-				processedText = "Which one is your favorite of the series?";
-				
-				
-			}
-		}
-		else
-		{
-			if (memeChecker(userText))
-			{
+				if (contentChecker(userText))
+				{
+					processedText = "Oh " + userText
+							+ " that's interesting! Let's talk about that ";
+					processedText = "Which one is your favorite of the series?";
+				}
+				else
+				{
+					processedText = "Have you ever played persona?";
 
-				processedText = "Hey, you found a meme: " + userText;
-				processedText += " Isn't that cool";
+				}
 			}
 			else
 			{
-				processedText = "Boring, that wasn't a meme. "; 
-			}
+				if (memeChecker(userText))
+				{
 
+					processedText = "Hey, you found a meme: " + userText;
+					processedText += " Isn't that cool";
+				}
+				else
+				{
+					processedText = "Boring, that wasn't a meme. ";
+				}
+
+			}
 		}
 
 		return processedText;
@@ -154,7 +163,7 @@ public class ChatBot
 	 * @return Whether the ChatBot's special content area is inside the input
 	 *         string
 	 */
-	
+
 	private boolean contentChecker(String input)
 	{
 		boolean hasMyContent = false;

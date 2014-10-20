@@ -1,6 +1,7 @@
 package chatbot.controller;
 
 import chatbot.model.ChatBot;
+import chatbot.view.ChatBotFrame;
 import chatbot.view.ChatBotView;
 
 /**
@@ -24,6 +25,10 @@ public class ChatBotAppController
 	 * The startup message for out ChatBot application
 	 */
 	private String startMessage;
+	/**
+	 * GUI frame for the application
+	 */
+	private ChatBotFrame baseFrame;
 
 	/**
 	 * Creates a ChatBotAppController and initializes the associated View and
@@ -32,6 +37,7 @@ public class ChatBotAppController
 	public ChatBotAppController()
 	{
 		appView = new ChatBotView(this);
+		baseFrame = new ChatBotFrame(this);
 		notSoCleverBot = new ChatBot("Mr. Cantare");
 		startMessage = "Welcome to the " + notSoCleverBot.getName() + " Chatbot type in your name please";
 	}
@@ -52,7 +58,7 @@ public class ChatBotAppController
 	public void start()
 	{
 		String message = appView.displayChatBotConverstations(startMessage);
-
+		/*
 		while (!notSoCleverBot.quitChecker(message))
 		{
 			message = notSoCleverBot.processText(message);
@@ -60,7 +66,7 @@ public class ChatBotAppController
 		}
 
 		quit();
-
+		*/
 	}
 
 	/**
