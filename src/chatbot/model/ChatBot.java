@@ -101,6 +101,11 @@ public class ChatBot
 		int randomChoice = (int) (Math.random() * 3);
 		if (userText != null)
 		{
+			if(numberOfChats<10)
+			{
+				//Use if's or a switch
+			}
+			
 			if (randomChoice == 0)
 			{
 				if (stringLengthChecker(userText))
@@ -138,6 +143,8 @@ public class ChatBot
 				{
 					processedText = "Boring, that wasn't a meme. ";
 				}
+				
+		
 
 			}
 		}

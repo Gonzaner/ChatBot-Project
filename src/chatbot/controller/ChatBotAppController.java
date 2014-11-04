@@ -2,6 +2,7 @@ package chatbot.controller;
 
 import chatbot.model.ChatBot;
 import chatbot.view.ChatBotFrame;
+import chatbot.view.ChatBotPanel;
 import chatbot.view.ChatBotView;
 
 /**
@@ -39,7 +40,8 @@ public class ChatBotAppController
 		appView = new ChatBotView(this);
 		baseFrame = new ChatBotFrame(this);
 		notSoCleverBot = new ChatBot("Mr. Cantare");
-		startMessage = "Welcome to the " + notSoCleverBot.getName() + " Chatbot type in your name please";
+		startMessage = "Welcome to the " + notSoCleverBot.getName()
+				+ " Chatbot type in your name please";
 	}
 
 	/**
@@ -56,17 +58,18 @@ public class ChatBotAppController
 	 * Starts the ChatBot application
 	 */
 	public void start()
+	{	
+		ChatBotPanel myAppPanel = (ChatBotPanel)baseFrame.getContentPane();
+		myAppPanel.displayTextToUser(startMessage);
+					 
+	}
+	public String sendTextToChatBot(String userInput)
 	{
-		String message = appView.displayChatBotConverstations(startMessage);
-		/*
-		while (!notSoCleverBot.quitChecker(message))
-		{
-			message = notSoCleverBot.processText(message);
-			message = appView.displayChatBotConverstations(message);
-		}
-
-		quit();
-		*/
+		String respondText = "";
+		
+		respondText= notSoCleverBot.processText(userInput);
+		
+		return respondText;
 	}
 
 	/**
