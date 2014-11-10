@@ -3,13 +3,20 @@ package chatbot.model;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-
+/**
+ * 
+ * @author ngon1817
+ * @version 1.4 11/4/4 - Changed GUI reference added a method for MVC
+ */
+		
 public class ChatBot
 {
 	private String name;
 	private int numberOfChats;
 	private ArrayList<String> memeList;
 	private String contentArea;
+	private ArrayList<String> userInputList;
+	private ChatUser myUser;
 
 	/**
 	 * Creates a ChatBot object with a specified name. Initializes the total
@@ -23,11 +30,11 @@ public class ChatBot
 	{
 		this.name = name;
 		numberOfChats = 0;
-
 		memeList = new ArrayList<String>();
 		fillTheMemeList();
-
+		userInputList = new ArrayList<String>();
 		contentArea = "Persona";
+		myUser = new ChatUser();
 	}
 
 	/**
@@ -98,12 +105,40 @@ public class ChatBot
 		String processedText = "";
 		incrementChats();
 
-		int randomChoice = (int) (Math.random() * 3);
+		int randomChoice = (int) (Math.random() * 6);
 		if (userText != null)
 		{
 			if(numberOfChats<10)
 			{
-				//Use if's or a switch
+				//you will need to use some if's or a switch
+				//Save userText to the chatUser's appropriate field.
+				//For items that are not String you will wrapper them
+				//like Interger.parseInt(userText) to save as an int
+				// or Boolean.parseBoolean(userText)to save as a boolean
+				if(numberOfChats == 0)
+				{
+					myUser.setName (userText);
+					processedText = "Hello " + myUser.getName() + " what is your age?";
+				}
+				else if(numberOfChats == 1)
+				{
+					int age = Integer.parseInt(userText);
+					myUser.setAge(age);
+					processedText = myUser.getName() + ", you are really" + myUser.getAge()+"years old?";
+					processedText = "\n What is your favorite movie?";
+				}
+				else if(numberOfChats == 2)
+				{
+					
+				}
+				else if(numberOfChats == 3)
+				{
+					
+				}
+				else 
+				{
+					
+				}
 			}
 			
 			if (randomChoice == 0)
@@ -131,9 +166,9 @@ public class ChatBot
 
 				}
 			}
-			else
+			else if (randomChoice == 2)
 			{
-				if (memeChecker(userText))
+				if (memeChecker(userText ))
 				{
 
 					processedText = "Hey, you found a meme: " + userText;
@@ -143,15 +178,53 @@ public class ChatBot
 				{
 					processedText = "Boring, that wasn't a meme. ";
 				}
-				
-		
 
 			}
+			else if (randomChoice == 3)
+			{
+				//User based talking
+				//Should store a string in processedText from another method say chooseRandomUserInfo(String)
+			}
+			
+			else if (randomChoice == 4)
+			{
+				userInputList.add(0, userText);
+				processedText= "Thanks for the input, "+ myUser.getName();
+			}
+			
+			else
+				
+			{
+				if(userInputChecker(userText))
+				{
+					processedText = "Random boring text for right now :D";
+				}
+			}
 		}
-
+		incrementChats();
 		return processedText;
 	}
 
+	private boolean userInputChecker(String input)
+	{
+		boolean matchesInput = false;
+		
+		if(userInputList.size() > 0 )
+		{
+			for(int loopCount =0; loopCount < userInputList.size(); loopCount++)
+			{
+				if(input.equalsIgnoreCase(userInputList.get(loopCount)))
+				{
+					matchesInput = true;
+					userInputList.remove(loopCount);
+					loopCount --;
+				}
+			}
+		}
+		
+		return matchesInput;
+	}
+	
 	private boolean stringLengthChecker(String input)
 	{
 		boolean isTooLong = false;

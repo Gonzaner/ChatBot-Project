@@ -50,6 +50,7 @@ public class ChatBotPanel extends JPanel
 		setupListeners();
 	}
 	
+	
 	private void setupScrollPane()
 	{
 		chatArea.setLineWrap(true);
