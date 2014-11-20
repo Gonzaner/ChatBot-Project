@@ -279,6 +279,8 @@ public class ChatBot
 
 		return isAMeme;
 	}
+	
+	
 
 	/**
 	 * Checks to see if it is okay to quit the program
@@ -298,5 +300,50 @@ public class ChatBot
 
 		return okToQuit;
 	}
-
+	/**
+	 * Check to see if the name of the chatbot is contained within the String supplied by the user.
+	 * @param currentInput The user supplied String
+	 * @return Wether the name is inside or not.
+	 */
+	
+	private boolean chatBotNameChecker(String currentInput)
+	{
+		boolean hasNameInString = false;
+		
+		if(currentInput.indexOf(this.getName())> -1)
+		{
+			hasNameInString = true;
+		}
+		return hasNameInString;
+		
+	}
+	
+	private String chatBotNameConversation(String currentInput)
+	{
+		String nameConversation = "This is what you typed after my name:";
+		
+		nameConversation += currentInput.substring(currentInput.indexOf(this.getName()) + this.getName().length(), currentInput.length() - 1);
+		
+		return nameConversation;
+	}
+	
+	
+	
+	private String noNameConversation(String currentInput)
+	{
+		String notNamed = "";
+		
+		int smallRandom = (int) (Math.random() * currentInput.length() / 2);
+		int largerRandom = (int) ((Math.random() + smallRandom * (currentInput.length() / 2) +1));
+		
+		notNamed = "You didn't say my name so here is a special phrase:" + currentInput.substring(smallRandom, largerRandom);
+		
+		return notNamed;
+	}
+	
+	
+	
+	
+	
+	
 }
