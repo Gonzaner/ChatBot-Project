@@ -3,6 +3,9 @@ package chatbot.model;
 public class ChatUser
 {
 	private String name;
+	/**
+	 * this is the age of the user
+	 */
 	private int age;
 	private String favoriteMovie;
 	private boolean isPierced;
